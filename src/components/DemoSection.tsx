@@ -3,23 +3,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Upload, AlertTriangle, CheckCircle, Activity, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
-const mockResults = {
-  lesionType: "Benign Melanocytic Nevus",
-  confidence: 92,
-  riskLevel: "Low",
-  details: [
-    { label: "Melanocytic Nevus", value: 92 },
-    { label: "Dermatofibroma", value: 5 },
-    { label: "Melanoma", value: 2 },
-    { label: "Other", value: 1 },
-  ],
-};
+interface AnalysisResult {
+  lesionType: string;
+  confidence: number;
+  riskLevel: string;
+  details: { label: string; value: number }[];
+  recommendation?: string;
+}
 
 const DemoSection = () => {
   const [image, setImage] = useState<string | null>(null);
   const [analyzing, setAnalyzing] = useState(false);
-  const [results, setResults] = useState<typeof mockResults | null>(null);
+  const [results, setResults] = useState<AnalysisResult | null>(null);
+  const { toast } = useToast();
 
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -34,14 +33,31 @@ const DemoSection = () => {
 
   const processFile = (file: File) => {
     const reader = new FileReader();
-    reader.onload = (e) => {
-      setImage(e.target?.result as string);
+    reader.onload = async (e) => {
+      const base64Image = e.target?.result as string;
+      setImage(base64Image);
       setResults(null);
       setAnalyzing(true);
-      setTimeout(() => {
+
+      try {
+        const { data, error } = await supabase.functions.invoke("analyze-skin", {
+          body: { image: base64Image },
+        });
+
+        if (error) throw error;
+        if (data?.error) throw new Error(data.error);
+
+        setResults(data as AnalysisResult);
+      } catch (err: any) {
+        console.error("Analysis failed:", err);
+        toast({
+          title: "Analysis Failed",
+          description: err.message || "Could not analyze the image. Please try again.",
+          variant: "destructive",
+        });
+      } finally {
         setAnalyzing(false);
-        setResults(mockResults);
-      }, 2500);
+      }
     };
     reader.readAsDataURL(file);
   };
@@ -63,7 +79,7 @@ const DemoSection = () => {
       <div className="container mx-auto px-4">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">Try It Yourself</h2>
-          <p className="text-muted-foreground text-lg max-w-xl mx-auto">Upload any skin image to see a simulated AI analysis</p>
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto">Upload any skin image to get an AI-powered analysis</p>
         </motion.div>
 
         <div className="max-w-2xl mx-auto">
@@ -98,7 +114,7 @@ const DemoSection = () => {
                     {analyzing ? (
                       <div className="text-center space-y-4">
                         <Activity className="w-10 h-10 text-primary mx-auto animate-pulse" />
-                        <p className="font-semibold text-foreground">Analyzing...</p>
+                        <p className="font-semibold text-foreground">Analyzing with AI...</p>
                         <Progress value={65} className="h-2" />
                       </div>
                     ) : results ? (
@@ -125,6 +141,11 @@ const DemoSection = () => {
                             </div>
                           ))}
                         </div>
+                        {results.recommendation && (
+                          <div className="bg-secondary/50 rounded-xl p-3">
+                            <p className="text-xs text-muted-foreground">{results.recommendation}</p>
+                          </div>
+                        )}
                       </div>
                     ) : null}
                   </div>
@@ -133,7 +154,7 @@ const DemoSection = () => {
                 <div className="mt-6 flex items-start gap-2 bg-secondary/50 rounded-xl p-4">
                   <AlertTriangle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <p className="text-xs text-muted-foreground">
-                    <strong>Disclaimer:</strong> This is a demo with simulated results. It is not medical advice. Always consult a dermatologist for professional diagnosis.
+                    <strong>Disclaimer:</strong> This AI analysis is for informational purposes only. It is not medical advice. Always consult a dermatologist for professional diagnosis.
                   </p>
                 </div>
               </motion.div>
