@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
+import dermaiLogo from "@/assets/dermai-logo.png";
 
 const FooterSection = () => {
   return (
@@ -29,9 +30,7 @@ const FooterSection = () => {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold">D</span>
-                </div>
+                <img src={dermaiLogo} alt="DERMAI" className="w-8 h-8 object-contain" />
                 <span className="font-bold text-lg">DERMAI</span>
               </div>
               <p className="text-sm opacity-70">AI-powered skin lesion detection for everyone. Your first step to skin health awareness.</p>

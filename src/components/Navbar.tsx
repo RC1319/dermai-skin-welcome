@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import dermaiLogo from "@/assets/dermai-logo.png";
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
@@ -18,10 +19,8 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <a href="#" className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-lg" style={{ fontFamily: 'Nunito' }}>D</span>
-          </div>
-          <span className="text-xl font-bold text-foreground" style={{ fontFamily: 'Nunito' }}>DERMAI</span>
+          <img src={dermaiLogo} alt="DERMAI Logo" className="h-9 w-9 object-contain" />
+          <span className="text-xl font-bold text-foreground" style={{ fontFamily: 'Playfair Display' }}>DERMAI</span>
         </a>
 
         {/* Desktop */}
