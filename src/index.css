@@ -2,87 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 30 50% 98%;
-    --foreground: 20 25% 15%;
+    --background: 180 15% 97%;
+    --foreground: 192 35% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 20 25% 15%;
+    --card-foreground: 192 35% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 20 25% 15%;
+    --popover-foreground: 192 35% 12%;
 
-    --primary: 12 76% 62%;
+    --primary: 174 62% 30%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 60% 95%;
-    --secondary-foreground: 20 25% 15%;
+    --secondary: 180 20% 93%;
+    --secondary-foreground: 192 35% 12%;
 
-    --muted: 30 30% 94%;
-    --muted-foreground: 20 10% 45%;
+    --muted: 180 12% 90%;
+    --muted-foreground: 192 15% 42%;
 
-    --accent: 160 45% 50%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 43 85% 55%;
+    --accent-foreground: 192 35% 12%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 30 25% 88%;
-    --input: 30 25% 88%;
-    --ring: 12 76% 62%;
+    --border: 180 15% 86%;
+    --input: 180 15% 86%;
+    --ring: 174 62% 30%;
 
-    --radius: 1rem;
+    --radius: 0.875rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary: 174 62% 30%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 180 12% 95%;
+    --sidebar-accent-foreground: 192 35% 12%;
+    --sidebar-border: 180 13% 91%;
+    --sidebar-ring: 174 62% 30%;
   }
 
   .dark {
-    --background: 20 20% 8%;
-    --foreground: 30 30% 92%;
+    --background: 192 30% 6%;
+    --foreground: 180 20% 92%;
 
-    --card: 20 18% 12%;
-    --card-foreground: 30 30% 92%;
+    --card: 192 25% 10%;
+    --card-foreground: 180 20% 92%;
 
-    --popover: 20 18% 12%;
-    --popover-foreground: 30 30% 92%;
+    --popover: 192 25% 10%;
+    --popover-foreground: 180 20% 92%;
 
-    --primary: 12 76% 62%;
+    --primary: 174 55% 40%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 20 15% 18%;
-    --secondary-foreground: 30 30% 92%;
+    --secondary: 192 18% 15%;
+    --secondary-foreground: 180 20% 92%;
 
-    --muted: 20 12% 20%;
-    --muted-foreground: 30 15% 60%;
+    --muted: 192 15% 18%;
+    --muted-foreground: 180 12% 55%;
 
-    --accent: 160 45% 45%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 43 80% 50%;
+    --accent-foreground: 192 35% 12%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 20 12% 22%;
-    --input: 20 12% 22%;
-    --ring: 12 76% 62%;
+    --border: 192 15% 20%;
+    --input: 192 15% 20%;
+    --ring: 174 55% 40%;
 
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-background: 192 25% 8%;
+    --sidebar-foreground: 180 15% 90%;
+    --sidebar-primary: 174 55% 40%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 192 15% 14%;
+    --sidebar-accent-foreground: 180 15% 90%;
+    --sidebar-border: 192 15% 16%;
+    --sidebar-ring: 174 55% 40%;
   }
 }
 
@@ -93,11 +93,11 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Playfair Display', serif;
   }
 }
 

@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Shield, Sparkles, ArrowDown } from "lucide-react";
+import dermaiLogo from "@/assets/dermai-logo.png";
 
 const HeroSection = () => {
   return (
     <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden">
-      {/* Warm gradient background */}
+      {/* Teal gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-secondary via-background to-secondary/50 -z-10" />
       <div className="absolute top-20 right-0 w-96 h-96 rounded-full bg-primary/10 blur-3xl -z-10" />
       <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-accent/10 blur-3xl -z-10" />
@@ -47,12 +48,11 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="relative flex justify-center"
           >
-            {/* Illustrative graphic */}
             <div className="relative w-72 h-72 md:w-96 md:h-96">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 animate-pulse" />
               <div className="absolute inset-4 rounded-full bg-gradient-to-tr from-primary/30 to-accent/30 flex items-center justify-center">
                 <div className="bg-card rounded-3xl p-8 shadow-xl border border-border">
-                  <Shield className="w-16 h-16 text-primary mx-auto mb-3" />
+                  <img src={dermaiLogo} alt="DERMAI" className="w-16 h-16 mx-auto mb-3" />
                   <p className="text-center font-bold text-foreground text-lg">Skin Scan</p>
                   <p className="text-center text-sm text-muted-foreground">AI Analysis Ready</p>
                   <div className="mt-4 space-y-2">
