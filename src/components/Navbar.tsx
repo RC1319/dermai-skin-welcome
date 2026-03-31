@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import dermaiLogo from "@/assets/dermai-logo.png";
 
 const navLinks = [
@@ -15,6 +17,23 @@ const navLinks = [
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      setUser(session?.user ?? null);
+    });
+    supabase.auth.getSession().then(({ data: { session } }) => setUser(session?.user ?? null));
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast({ title: "Logged out", description: "You've been signed out." });
+    navigate("/auth");
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
@@ -31,9 +50,15 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
-          <Button variant="ghost" className="rounded-full px-6" asChild>
-            <Link to="/auth">Login</Link>
-          </Button>
+          {user ? (
+            <Button variant="ghost" className="rounded-full px-6 gap-2" onClick={handleLogout}>
+              <LogOut className="w-4 h-4" /> Logout
+            </Button>
+          ) : (
+            <Button variant="ghost" className="rounded-full px-6" asChild>
+              <Link to="/auth">Login</Link>
+            </Button>
+          )}
           <Button className="rounded-full px-6" asChild>
             <a href="#demo">Try It Free</a>
           </Button>
@@ -53,9 +78,15 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
-          <Button variant="ghost" className="rounded-full w-full" asChild>
-            <Link to="/auth" onClick={() => setMobileOpen(false)}>Login</Link>
-          </Button>
+          {user ? (
+            <Button variant="ghost" className="rounded-full w-full gap-2" onClick={() => { setMobileOpen(false); handleLogout(); }}>
+              <LogOut className="w-4 h-4" /> Logout
+            </Button>
+          ) : (
+            <Button variant="ghost" className="rounded-full w-full" asChild>
+              <Link to="/auth" onClick={() => setMobileOpen(false)}>Login</Link>
+            </Button>
+          )}
           <Button className="rounded-full w-full" asChild>
             <a href="#demo" onClick={() => setMobileOpen(false)}>Try It Free</a>
           </Button>
