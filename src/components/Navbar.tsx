@@ -50,9 +50,15 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
-          <Button variant="ghost" className="rounded-full px-6" asChild>
-            <Link to="/auth">Login</Link>
-          </Button>
+          {user ? (
+            <Button variant="ghost" className="rounded-full px-6 gap-2" onClick={handleLogout}>
+              <LogOut className="w-4 h-4" /> Logout
+            </Button>
+          ) : (
+            <Button variant="ghost" className="rounded-full px-6" asChild>
+              <Link to="/auth">Login</Link>
+            </Button>
+          )}
           <Button className="rounded-full px-6" asChild>
             <a href="#demo">Try It Free</a>
           </Button>
