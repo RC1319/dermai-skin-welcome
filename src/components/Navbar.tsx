@@ -78,12 +78,15 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
-          <Button variant="ghost" className="rounded-full w-full" asChild>
-            <Link to="/auth" onClick={() => setMobileOpen(false)}>Login</Link>
-          </Button>
-          <Button className="rounded-full w-full" asChild>
-            <a href="#demo" onClick={() => setMobileOpen(false)}>Try It Free</a>
-          </Button>
+          {user ? (
+            <Button variant="ghost" className="rounded-full w-full gap-2" onClick={() => { setMobileOpen(false); handleLogout(); }}>
+              <LogOut className="w-4 h-4" /> Logout
+            </Button>
+          ) : (
+            <Button variant="ghost" className="rounded-full w-full" asChild>
+              <Link to="/auth" onClick={() => setMobileOpen(false)}>Login</Link>
+            </Button>
+          )}
         </div>
       )}
     </nav>
