@@ -17,6 +17,23 @@ const navLinks = [
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      setUser(session?.user ?? null);
+    });
+    supabase.auth.getSession().then(({ data: { session } }) => setUser(session?.user ?? null));
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast({ title: "Logged out", description: "You've been signed out." });
+    navigate("/auth");
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
