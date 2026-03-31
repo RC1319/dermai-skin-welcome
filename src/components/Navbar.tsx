@@ -31,6 +31,9 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
+          <Button variant="ghost" className="rounded-full px-6" asChild>
+            <Link to="/auth">Login</Link>
+          </Button>
           <Button className="rounded-full px-6" asChild>
             <a href="#demo">Try It Free</a>
           </Button>
