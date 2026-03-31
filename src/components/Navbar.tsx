@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import dermaiLogo from "@/assets/dermai-logo.png";
@@ -30,6 +31,9 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
+          <Button variant="ghost" className="rounded-full px-6" asChild>
+            <Link to="/auth">Login</Link>
+          </Button>
           <Button className="rounded-full px-6" asChild>
             <a href="#demo">Try It Free</a>
           </Button>
@@ -49,6 +53,9 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
+          <Button variant="ghost" className="rounded-full w-full" asChild>
+            <Link to="/auth" onClick={() => setMobileOpen(false)}>Login</Link>
+          </Button>
           <Button className="rounded-full w-full" asChild>
             <a href="#demo" onClick={() => setMobileOpen(false)}>Try It Free</a>
           </Button>
