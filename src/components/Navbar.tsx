@@ -87,6 +87,9 @@ const Navbar = () => {
               <Link to="/auth" onClick={() => setMobileOpen(false)}>Login</Link>
             </Button>
           )}
+          <Button className="rounded-full w-full" asChild>
+            <a href="#demo" onClick={() => setMobileOpen(false)}>Try It Free</a>
+          </Button>
         </div>
       )}
     </nav>
