@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Upload, AlertTriangle, CheckCircle, Activity, RotateCcw } from "lucide-react";
+import { Upload, AlertTriangle, CheckCircle, Activity, RotateCcw, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { supabase } from "@/integrations/supabase/client";
@@ -90,15 +90,33 @@ const DemoSection = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                onDrop={handleDrop}
-                onDragOver={(e) => e.preventDefault()}
-                className="border-2 border-dashed border-primary/40 rounded-3xl p-12 text-center cursor-pointer hover:border-primary/70 transition-colors bg-card"
-                onClick={() => document.getElementById("demo-file-input")?.click()}
+                className="space-y-4"
               >
-                <Upload className="w-12 h-12 text-primary mx-auto mb-4" />
-                <p className="text-lg font-semibold text-foreground mb-2">Drag & drop an image here</p>
-                <p className="text-muted-foreground text-sm">or click to browse files</p>
-                <input id="demo-file-input" type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+                <div
+                  onDrop={handleDrop}
+                  onDragOver={(e) => e.preventDefault()}
+                  className="border-2 border-dashed border-primary/40 rounded-3xl p-12 text-center cursor-pointer hover:border-primary/70 transition-colors bg-card"
+                  onClick={() => document.getElementById("demo-file-input")?.click()}
+                >
+                  <Upload className="w-12 h-12 text-primary mx-auto mb-4" />
+                  <p className="text-lg font-semibold text-foreground mb-2">Drag & drop an image here</p>
+                  <p className="text-muted-foreground text-sm">or click to browse files</p>
+                  <input id="demo-file-input" type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="flex-1 h-px bg-border" />
+                  <span className="text-sm text-muted-foreground">or</span>
+                  <div className="flex-1 h-px bg-border" />
+                </div>
+                <Button
+                  variant="outline"
+                  className="w-full py-6 rounded-2xl text-base gap-3"
+                  onClick={() => document.getElementById("demo-camera-input")?.click()}
+                >
+                  <Camera className="w-6 h-6" />
+                  Take a Photo
+                </Button>
+                <input id="demo-camera-input" type="file" accept="image/*" capture="environment" className="hidden" onChange={handleFileChange} />
               </motion.div>
             ) : (
               <motion.div key="result" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-card rounded-3xl border border-border p-6 md:p-8 shadow-lg">
