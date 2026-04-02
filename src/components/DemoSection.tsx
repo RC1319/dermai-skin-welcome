@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Upload, AlertTriangle, CheckCircle, Activity, RotateCcw } from "lucide-react";
+import { Upload, AlertTriangle, CheckCircle, Activity, RotateCcw, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { supabase } from "@/integrations/supabase/client";
