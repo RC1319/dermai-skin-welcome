@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Lock, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import dermaiLogo from "@/assets/dermai-logo.png";
+import authHero from "@/assets/auth-hero.jpg";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -51,32 +52,62 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen flex">
+      {/* Left: Image */}
+      <div className="hidden lg:block lg:w-1/2 xl:w-[55%] relative overflow-hidden">
+        <img
+          src={authHero}
+          alt="Botanical"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+        <div className="absolute bottom-0 left-0 p-10 text-white">
+          <div className="flex items-center gap-3 mb-4">
+            <img src={dermaiLogo} alt="DERMAI" className="h-10 w-10 object-contain" />
+            <span className="text-2xl font-bold" style={{ fontFamily: "Playfair Display" }}>
+              DERMAI
+            </span>
+          </div>
+          <p className="text-white/80 max-w-sm text-sm leading-relaxed">
+            AI-powered skin analysis and personalized care recommendations — because your skin deserves precision.
+          </p>
+        </div>
+      </div>
+
+      {/* Right: Form */}
+      <div className="w-full lg:w-1/2 xl:w-[45%] flex flex-col justify-center px-6 sm:px-12 lg:px-16 xl:px-20 bg-background">
         {/* Back to home */}
         <button
           onClick={() => navigate("/")}
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+          className="absolute top-6 left-6 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to home
         </button>
 
-        {/* Card */}
-        <div className="bg-card rounded-2xl border border-border shadow-lg p-8">
-          {/* Logo */}
-          <div className="flex flex-col items-center mb-8">
-            <img src={dermaiLogo} alt="DERMAI" className="h-14 w-14 object-contain mb-3" />
-            <h1 className="text-2xl font-bold text-foreground" style={{ fontFamily: "Playfair Display" }}>
+        <div className="w-full max-w-md mx-auto">
+          {/* Mobile logo */}
+          <div className="lg:hidden flex flex-col items-center mb-8">
+            <img src={dermaiLogo} alt="DERMAI" className="h-12 w-12 object-contain mb-3" />
+            <h1 className="text-xl font-bold text-foreground" style={{ fontFamily: "Playfair Display" }}>
+              DERMAI
+            </h1>
+          </div>
+
+          <div className="mb-8">
+            <h1
+              className="text-3xl font-bold text-foreground mb-2"
+              style={{ fontFamily: "Playfair Display" }}
+            >
               {isLogin ? "Welcome Back" : "Create Account"}
             </h1>
-            <p className="text-sm text-muted-foreground mt-1">
+            <p className="text-muted-foreground">
               {isLogin ? "Sign in to your DERMAI account" : "Sign up to get started with DERMAI"}
             </p>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <div className="relative">
@@ -87,7 +118,7 @@ const Auth = () => {
                   placeholder="you@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 rounded-xl h-12"
                   required
                 />
               </div>
@@ -103,7 +134,7 @@ const Auth = () => {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 pr-10"
+                  className="pl-10 pr-10 rounded-xl h-12"
                   required
                   minLength={6}
                 />
@@ -117,7 +148,7 @@ const Auth = () => {
               </div>
             </div>
 
-            <Button type="submit" className="w-full rounded-full" disabled={loading}>
+            <Button type="submit" className="w-full rounded-full h-12 text-base" disabled={loading}>
               {loading ? "Please wait..." : isLogin ? "Sign In" : "Sign Up"}
             </Button>
           </form>
