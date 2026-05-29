@@ -57,7 +57,7 @@ const Auth = () => {
       <div className="hidden lg:block lg:w-1/2 xl:w-[55%] relative overflow-hidden">
         <img
           src={authHero}
-          alt="Botanical"
+          alt="Dermatology AI analysis background"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
