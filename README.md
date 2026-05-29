@@ -38,13 +38,17 @@ Simple and clean dashboard for users
 
 Installation / Execution Steps to Run the Project
 Step 1: Clone the Repository
-git clone https://github.com/your-username/derm-ai.git
+git clone https://github.com/RC1319/derm-ai.git
+
 Step 2: Navigate to Project Folder
 cd derm-ai
+
 Step 3: Install Required Dependencies
 pip install -r requirements.txt
+
 Step 4: Run the Application
 python app.py
+
 Step 5: Open in Browser
 
 Open your browser and visit:
